@@ -9,7 +9,7 @@ import { useFrame, useThree } from "@react-three/fiber"
 
 export default function Model({scroll, ...props}) {
   const group = useRef()
-  const { nodes, materials, animations } = useGLTF('/<%=filename%>.gltf')
+  const { nodes, materials, animations } = useGLTF('/<%=filename%>.glb')
   const [hovered, set] = useState()
   const { actions } = useAnimations(animations, group)
 
@@ -26,4 +26,4 @@ export default function Model({scroll, ...props}) {
   )
 }
 
-useGLTF.preload('<%=filename%>.gltf')
+useGLTF.preload('<%=filename%>.glb')
