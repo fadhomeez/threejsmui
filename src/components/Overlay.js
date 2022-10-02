@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react"
-// import SimpleMap from "./SimpleMap"
 
 const Overlay = forwardRef(({ caption, scroll }, ref) => (
   <div
@@ -13,36 +12,28 @@ const Overlay = forwardRef(({ caption, scroll }, ref) => (
       <div class="dot">
         <h1>About Us</h1>
         <p>
-        Tech company incubated by
-        NTUitive and supported by ESG Singapore.
-
-        We focus on creating virtualization tools,
-        to accelerate the process of bringing products
-        and services into the virtual space
+        Insert About Text Here
         </p>
 
         <h1>Our Mission</h1>
-        <p>Create conventional 3D virtualization tools for the masses</p>
+        <p>What is our Mission</p>
 
         <h1>Our Vision</h1>
-        <p>To Pave the way for a massively virtualized world</p>
+        <p>What is Our Vision</p>
 
       </div>
     </div>
     <div style={{ height: "200vh" }}>
       <div class="dot">
-        <h1>Investing in the future</h1>
-        <h1>Democratizing Virtualization</h1>
+        <h1>Something Something</h1>
+        <h1>Something else</h1>
       </div>
     </div>
     <div style={{ height: "200vh" }}>
       <div class="dot">
         <h1>Contact us to know more</h1>
-        <p>105 Cecil Street 22-00, Suite 2226 The Octagon, 069534</p>
-        contact@paratlas.sg
-        {/* <div class="map">
-        <SimpleMap />
-        </div> */}
+        <p>123 456</p>
+        contact@helloworld.com
       </div>
     </div>
     <span class="caption" ref={caption}>
