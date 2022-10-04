@@ -1,7 +1,7 @@
 import React, { Suspense , useEffect, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Physics, useCylinder, usePlane , useBox, useSphere } from '@react-three/cannon'
-import { OrbitControls, Environment } from '@react-three/drei'
+import { OrbitControls, Environment, PerspectiveCamera } from '@react-three/drei'
 import Vehicle from './components/VehicleControls'
 import "./App.css"
 import { useControls } from 'leva'
@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <div style = {{width :"100%" , height: "100%"}}ref = {mystuff}>
-      <Canvas dpr={[1, 1.5]} shadows camera={{ position: [0, 5, 15], fov: 50 }}>
+      <Canvas dpr={[1, 1.5]} shadows>
         <fog attach="fog" args={['#171720', 10, 50]} />
         <color attach="background" args={['#171720']} />
         <ambientLight intensity={0.1} />

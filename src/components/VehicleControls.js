@@ -1,10 +1,12 @@
-import { useRef } from 'react'
+import { useRef , useState} from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useRaycastVehicle } from '@react-three/cannon'
 import { useControls } from '../utils/useControls'
 import Bmw from '../Models/Bmw'
 import Wheel from '../Models/Wheel'
 import * as THREE from 'three'
+import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
+import { Vector3 } from 'yuka'
 
 function Vehicle({ radius = 0.7, width = 1.2, height = -0.04, front = 1.5, back = -1.3, steer = 0.75, force = 2000, maxBrake = 1e5, ...props }) {
   const chassis = useRef()
@@ -58,15 +60,22 @@ function Vehicle({ radius = 0.7, width = 1.2, height = -0.04, front = 1.5, back 
     }
   })
 
-  var target = new THREE.Vector3(); // create once an reuse it
+
+  const [target, setTarget] = useState(new THREE.Vector3);
 
   useFrame (() => {
     chassis.current.getWorldPosition(target)
+    setTarget(target);
     console.log(target)
   })
 
   return (
     <group ref={vehicle} position={[0, -0.4, 0]}>
+      <PerspectiveCamera
+      makeDefault
+      position={target}
+      args={[45, 1.2, 1, 1000]}/>
+      <OrbitControls target = {[10,10,50]}/>
       <Bmw ref={chassis} rotation={props.rotation} position={props.position} angularVelocity={props.angularVelocity} />
       <Wheel ref={wheel1} radius={radius} leftSide />
       <Wheel ref={wheel2} radius={radius} />
