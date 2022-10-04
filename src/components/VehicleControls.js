@@ -4,6 +4,7 @@ import { useRaycastVehicle } from '@react-three/cannon'
 import { useControls } from '../utils/useControls'
 import Bmw from '../Models/Bmw'
 import Wheel from '../Models/Wheel'
+import * as THREE from 'three'
 
 function Vehicle({ radius = 0.7, width = 1.2, height = -0.04, front = 1.5, back = -1.3, steer = 0.75, force = 2000, maxBrake = 1e5, ...props }) {
   const chassis = useRef()
@@ -48,12 +49,20 @@ function Vehicle({ radius = 0.7, width = 1.2, height = -0.04, front = 1.5, back 
     for (let e = 2; e < 4; e++) api.applyEngineForce(forward || backward ? force * (forward && !backward ? -1 : 1) : 0, 2)
     for (let s = 0; s < 2; s++) api.setSteeringValue(left || right ? steer * (left && !right ? 1 : -1) : 0, s)
     for (let b = 2; b < 4; b++) api.setBrake(brake ? maxBrake : 0, b)
+
     if (reset) {
       chassis.current.api.position.set(0, 0.5, 0)
       chassis.current.api.velocity.set(0, 0, 0)
       chassis.current.api.angularVelocity.set(0, 0.5, 0)
       chassis.current.api.rotation.set(0, -Math.PI / 4, 0)
     }
+  })
+
+  var target = new THREE.Vector3(); // create once an reuse it
+
+  useFrame (() => {
+    chassis.current.getWorldPosition(target)
+    console.log(target)
   })
 
   return (
