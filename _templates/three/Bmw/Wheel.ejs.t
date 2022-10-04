@@ -1,3 +1,7 @@
+---
+to: src/Models/Wheel.js
+---
+
 import { forwardRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useCylinder } from '@react-three/cannon'
