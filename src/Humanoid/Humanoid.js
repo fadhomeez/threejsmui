@@ -14,7 +14,7 @@ const animationPaths = {
   idle: `Models/anims/Idle.glb`,
   walk: `Models/anims/placeholder/placeholder1.glb`,
   run: `Models/anims/walking.glb`,
-  jump: `Models/anims/altchar4.glb`,
+  jump: `Models/anims/placeholder/placeholder5.glb`,
   landing: `Models/anims/landing.glb`,
   inAir: `Models/anims/placeholder/placeholder2.glb`,
   backpedal: `Models/anims/back.glb`,
@@ -25,7 +25,7 @@ const animationPaths = {
 };
 
 function ThirdPersonCharacter() {
-  const mannyObj = useFBX("Models/mainchar.fbx");
+  const mannyObj = useFBX("Models/avatars/mainchar.fbx");
 
 
   return (
