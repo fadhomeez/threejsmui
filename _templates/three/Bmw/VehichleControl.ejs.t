@@ -2,12 +2,15 @@
 to: src/components/VehicleControls.js
 ---
 
-import { useRef } from 'react'
+import { useRef , useState} from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useRaycastVehicle } from '@react-three/cannon'
 import { useControls } from '../utils/useControls'
 import Bmw from '../Models/Bmw'
 import Wheel from '../Models/Wheel'
+import * as THREE from 'three'
+import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
+import { Vector3 } from 'yuka'
 
 function Vehicle({ radius = 0.7, width = 1.2, height = -0.04, front = 1.5, back = -1.3, steer = 0.75, force = 2000, maxBrake = 1e5, ...props }) {
   const chassis = useRef()
@@ -52,6 +55,7 @@ function Vehicle({ radius = 0.7, width = 1.2, height = -0.04, front = 1.5, back 
     for (let e = 2; e < 4; e++) api.applyEngineForce(forward || backward ? force * (forward && !backward ? -1 : 1) : 0, 2)
     for (let s = 0; s < 2; s++) api.setSteeringValue(left || right ? steer * (left && !right ? 1 : -1) : 0, s)
     for (let b = 2; b < 4; b++) api.setBrake(brake ? maxBrake : 0, b)
+
     if (reset) {
       chassis.current.api.position.set(0, 0.5, 0)
       chassis.current.api.velocity.set(0, 0, 0)
@@ -60,9 +64,29 @@ function Vehicle({ radius = 0.7, width = 1.2, height = -0.04, front = 1.5, back 
     }
   })
 
+
+  const [target, setTarget] = useState(new THREE.Vector3());
+  const targetRef = useRef(null);
+
+  useFrame ((state) => {
+    chassis.current.getWorldPosition(target)
+    setTarget(target);
+    console.log(target)
+    state.camera.lookAt(target);
+    state.camera.updateProjectionMatrix();
+  })
+
   return (
     <group ref={vehicle} position={[0, -0.4, 0]}>
+      <group ref = {target}>
+      <PerspectiveCamera
+      makeDefault
+      position={[10,5,0]}
+      args={[45, 1.2, 1, 1000]}
+      onUpdate={(c) => c.updateProjectionMatrix() }/>
+      <OrbitControls target = {[10,10,50]}/>
       <Bmw ref={chassis} rotation={props.rotation} position={props.position} angularVelocity={props.angularVelocity} />
+      </group>
       <Wheel ref={wheel1} radius={radius} leftSide />
       <Wheel ref={wheel2} radius={radius} />
       <Wheel ref={wheel3} radius={radius} leftSide />

@@ -61,22 +61,27 @@ function Vehicle({ radius = 0.7, width = 1.2, height = -0.04, front = 1.5, back 
   })
 
 
-  const [target, setTarget] = useState(new THREE.Vector3);
+  const [target, setTarget] = useState(new THREE.Vector3());
+  const targetRef = useRef(null);
 
-  useFrame (() => {
+  useFrame ((state) => {
     chassis.current.getWorldPosition(target)
-    setTarget(target);
     console.log(target)
+    state.camera.lookAt(target);
+    state.camera.updateProjectionMatrix();
   })
 
   return (
     <group ref={vehicle} position={[0, -0.4, 0]}>
+      <group ref = {target}>
       <PerspectiveCamera
       makeDefault
-      position={target}
-      args={[45, 1.2, 1, 1000]}/>
+      position={[10,5,0]}
+      args={[45, 1.2, 1, 1000]}
+      onUpdate={(c) => c.updateProjectionMatrix() }/>
       <OrbitControls target = {[10,10,50]}/>
       <Bmw ref={chassis} rotation={props.rotation} position={props.position} angularVelocity={props.angularVelocity} />
+      </group>
       <Wheel ref={wheel1} radius={radius} leftSide />
       <Wheel ref={wheel2} radius={radius} />
       <Wheel ref={wheel3} radius={radius} leftSide />

@@ -1,22 +1,12 @@
 import { forwardRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useBox } from '@react-three/cannon'
-import { useFrame } from '@react-three/fiber'
-import * as THREE from 'three'
 
 useGLTF.preload('/Models/Bmw.glb')
 
 const Bmw = forwardRef(({ args = [1.7, 1, 4], mass = 500, ...props }, ref) => {
   const { nodes, materials } = useGLTF('/Models/Bmw.glb')
   const [, api] = useBox(() => ({ mass, args, allowSleep: false, onCollide: (e) => console.log('bonk', e.body.userData), ...props }), ref)
-
-  var target = new THREE.Vector3(); // create once an reuse it
-
-  useFrame (() => {
-    ref.current.getWorldPosition(target)
-    // console.log(target)
-  })
-
   return (
     <mesh ref={ref} api={api} castShadow>
       <group rotation={[-Math.PI / 2, 0, 0]}>
