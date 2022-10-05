@@ -25,7 +25,7 @@ const animationPaths = {
 };
 
 function ThirdPersonCharacter() {
-  const mannyObj = useFBX("Models/avatars/mainchar.fbx");
+  const mannyObj = useFBX("Models/avatars/amy.fbx");
 
 
   return (
