@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Leva } from 'leva';
 import { Stats } from '@react-three/drei';
+import Humanoid from './Humanoid/Humanoid';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <>
-    <App />
+    <Humanoid />
     <Stats/>
     </>
 );

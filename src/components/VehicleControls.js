@@ -66,6 +66,7 @@ function Vehicle({ radius = 0.7, width = 1.2, height = -0.04, front = 1.5, back 
 
   useFrame ((state) => {
     chassis.current.getWorldPosition(target)
+    setTarget(target);
     console.log(target)
     state.camera.lookAt(target);
     state.camera.updateProjectionMatrix();
