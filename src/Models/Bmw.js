@@ -2,10 +2,10 @@ import { forwardRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useBox } from '@react-three/cannon'
 
-useGLTF.preload('/Models/Bmw.glb')
+// useGLTF.preload('https://dl.dropbox.com/s/80x1zpykdwygmw1/Bmw.glb')
 
 const Bmw = forwardRef(({ args = [1.7, 1, 4], mass = 500, ...props }, ref) => {
-  const { nodes, materials } = useGLTF('/Models/Bmw.glb')
+  const { nodes, materials } = useGLTF('https://dl.dropbox.com/s/80x1zpykdwygmw1/Bmw.glb')
   const [, api] = useBox(() => ({ mass, args, allowSleep: false, onCollide: (e) => console.log('bonk', e.body.userData), ...props }), ref)
   return (
     <mesh ref={ref} api={api} castShadow>

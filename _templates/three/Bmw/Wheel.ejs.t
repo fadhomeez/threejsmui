@@ -6,10 +6,9 @@ import { forwardRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useCylinder } from '@react-three/cannon'
 
-useGLTF.preload('/Models/Wheel.glb')
 
 const Wheel = forwardRef(({ radius = 0.7, leftSide, ...props }, ref) => {
-  const { nodes, materials } = useGLTF('/Models/wheel.glb')
+  const { nodes, materials } = useGLTF('https://dl.dropbox.com/s/gudfc20svvgl8pc/wheel.glb')
   useCylinder(() => ({ mass: 1, type: 'Kinematic', material: 'wheel', collisionFilterGroup: 0, args: [radius, radius, 0.5, 16], ...props }), ref)
   return (
     <mesh ref={ref}>

@@ -3,12 +3,22 @@ import { Canvas } from '@react-three/fiber'
 import { Physics, useCylinder, usePlane , useBox, useSphere } from '@react-three/cannon'
 import { OrbitControls, Environment } from '@react-three/drei'
 import Vehicle from './components/VehicleControls'
+import { Html, useProgress } from '@react-three/drei'
 import "./App.css"
 
 export default function App() {
+
+  function Loader() {
+    const { progress } = useProgress()
+    console.log(progress);
+  
+    return <Html center>{progress} % loaded</Html>
+  }
+
   return (
     <>
       <Canvas dpr={[1, 1.5]} shadows camera={{ position: [0, 5, 15], fov: 50 }}>
+      <Suspense fallback={<Loader />}>
         <fog attach="fog" args={['#171720', 10, 50]} />
         <color attach="background" args={['#171720']} />
         <ambientLight intensity={0.1} />
@@ -18,10 +28,9 @@ export default function App() {
           <Vehicle position={[0, 2, 0]} rotation={[0, -Math.PI / 4, 0]} angularVelocity={[0, 0.5, 0]} wheelRadius={0.3} />
           <Box position={[7, 2.5, -5]} userData={{ id: 'Box-3' }} />
         </Physics>
-        <Suspense fallback={null}>
           <Environment preset="apartment" />
-        </Suspense>
         <OrbitControls />
+        </Suspense>
       </Canvas>
       <div style={{ position: 'absolute', top: 30, left: 40 }}>
         <pre>

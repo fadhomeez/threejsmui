@@ -7,6 +7,9 @@ import Wheel from '../Models/Wheel'
 import * as THREE from 'three'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Vector3 } from 'yuka'
+import { Html, useProgress } from '@react-three/drei'
+import { Suspense } from "react";
+
 
 function Vehicle({ radius = 0.7, width = 1.2, height = -0.04, front = 1.5, back = -1.3, steer = 0.75, force = 2000, maxBrake = 1e5, ...props }) {
   const chassis = useRef()
@@ -67,12 +70,13 @@ function Vehicle({ radius = 0.7, width = 1.2, height = -0.04, front = 1.5, back 
   useFrame ((state) => {
     chassis.current.getWorldPosition(target)
     setTarget(target);
-    console.log(target)
     state.camera.lookAt(target);
     state.camera.updateProjectionMatrix();
   })
 
+
   return (
+   
     <group ref={vehicle} position={[0, -0.4, 0]}>
       <group ref = {target}>
       <PerspectiveCamera
@@ -88,6 +92,7 @@ function Vehicle({ radius = 0.7, width = 1.2, height = -0.04, front = 1.5, back 
       <Wheel ref={wheel3} radius={radius} leftSide />
       <Wheel ref={wheel4} radius={radius} />
     </group>
+    
   )
 }
 
