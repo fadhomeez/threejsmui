@@ -6,6 +6,8 @@ import Overlay from "./components/Overlay";
 import "./App.css";
 import Navbar from "./ui-components/Navbar";
 import Footer from "./ui-components/Footer";
+import SideUI from "./ui-components/SideUI";
+
 export default function App() {
   const overlay = useRef();
   const caption = useRef();
@@ -13,7 +15,7 @@ export default function App() {
   return (
     <>
       <div style={{ width: "100vw", height: "100vh" }}>
-        <Navbar />
+        {/* <Navbar />
         <Canvas
           shadows
           onCreated={(state) => state.events.connect(overlay.current)}
@@ -30,8 +32,8 @@ export default function App() {
             <Environment preset="city" />
           </Suspense>
         </Canvas>
-        {/* <Footer /> */}
-        <Overlay ref={overlay} caption={caption} scroll={scroll} />
+        <Overlay ref={overlay} caption={caption} scroll={scroll} /> */}
+        <SideUI />
       </div>
     </>
   );
