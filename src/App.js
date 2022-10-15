@@ -7,6 +7,7 @@ import "./App.css";
 import Navbar from "./ui-components/Navbar";
 import Footer from "./ui-components/Footer";
 import SideUI from "./ui-components/SideUI";
+import Eyes from "./ui-components/Eyes";
 
 export default function App() {
   const overlay = useRef();
@@ -33,7 +34,8 @@ export default function App() {
           </Suspense>
         </Canvas>
         <Overlay ref={overlay} caption={caption} scroll={scroll} /> */}
-        <SideUI />
+        {/* <SideUI /> */}
+        <Eyes />
       </div>
     </>
   );
